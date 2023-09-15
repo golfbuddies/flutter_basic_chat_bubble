@@ -8,6 +8,8 @@ class BasicChatMessage {
   String? peerUserName;
   String? messageText;
   String? timeStamp;
+  String? link;
 
-  BasicChatMessage({this.peerUserName, this.messageText, this.timeStamp});
+  BasicChatMessage(
+      {this.peerUserName, this.messageText, this.timeStamp, this.link});
 }

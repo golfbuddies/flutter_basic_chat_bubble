@@ -42,65 +42,76 @@ class BasicChatBubble extends StatelessWidget {
                 color: backgroundColor,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: Column(
-                crossAxisAlignment:
-                    isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10.0, right: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            message?.peerUserName ?? '',
-                            style: TextStyle(
-                                color: textColor,
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                          ),
+                  Column(
+                    crossAxisAlignment: isMe
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10.0, right: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Flexible(
+                              child: Text(
+                                message?.peerUserName ?? '',
+                                style: TextStyle(
+                                    color: textColor,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
+                              ),
+                            ),
+                            Text(
+                              message?.timeStamp ?? '',
+                              style: TextStyle(
+                                  color: textColor,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.normal),
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
                         ),
-                        Text(
-                          message?.timeStamp ?? '',
-                          style: TextStyle(
-                              color: textColor,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.normal),
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
-                          textAlign: TextAlign.end,
-                        ),
-                      ],
-                    ),
+                      ),
+                      this.buttonWidget != null
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                  Container(child: this.buttonWidget),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.0),
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      buttonText ?? '',
+                                      style: TextStyle(
+                                          color: textColor,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                  ),
+                                ])
+                          : Text(message?.messageText ?? '',
+                              style: TextStyle(
+                                  color: textColor,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.normal),
+                              overflow: TextOverflow.visible,
+                              softWrap: true)
+                    ],
                   ),
-                  this.buttonWidget != null
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                              Container(child: this.buttonWidget),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                              Flexible(
-                                child: Text(
-                                  buttonText ?? '',
-                                  style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              ),
-                            ])
-                      : Text(message?.messageText ?? '',
-                          style: TextStyle(
-                              color: textColor,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.normal),
-                          overflow: TextOverflow.visible,
-                          softWrap: true)
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Icon(Icons.link, color: Colors.white),
+                  ),
                 ],
               ),
             ),
