@@ -25,6 +25,7 @@ class BasicChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Icon? icon = message?.icon ?? Icon(Icons.link, color: Colors.white);
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Row(
@@ -110,7 +111,7 @@ class BasicChatBubble extends StatelessWidget {
                   Positioned(
                     bottom: 0,
                     right: 0,
-                    child: Icon(Icons.link, color: Colors.white),
+                    child: icon,
                   ),
                 ],
               ),

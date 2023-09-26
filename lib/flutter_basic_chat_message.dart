@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// The [BasicChatMessage] class represents a single message, that forms
 /// the content of a [BasicChatBubble]. This object has the following properties:
 /// String [peerUserName] containes the name of the peer user (sender or receiver of message)
@@ -9,7 +11,12 @@ class BasicChatMessage {
   String? messageText;
   String? timeStamp;
   String? link;
+  Icon? icon;
 
   BasicChatMessage(
-      {this.peerUserName, this.messageText, this.timeStamp, this.link});
+      {this.peerUserName,
+      this.messageText,
+      this.timeStamp,
+      this.link,
+      this.icon});
 }
