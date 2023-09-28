@@ -25,7 +25,6 @@ class BasicChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Icon? icon = message?.icon ?? Icon(Icons.link, color: Colors.white);
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Row(
@@ -43,76 +42,65 @@ class BasicChatBubble extends StatelessWidget {
                 color: backgroundColor,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: Stack(
+              child: Column(
+                crossAxisAlignment:
+                    isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: isMe
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 10.0, right: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Flexible(
-                              child: Text(
-                                message?.peerUserName ?? '',
-                                style: TextStyle(
-                                    color: textColor,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.fade,
-                                softWrap: false,
-                              ),
-                            ),
-                            Text(
-                              message?.timeStamp ?? '',
-                              style: TextStyle(
-                                  color: textColor,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.normal),
-                              overflow: TextOverflow.fade,
-                              softWrap: false,
-                              textAlign: TextAlign.end,
-                            ),
-                          ],
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10.0, right: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Flexible(
+                          child: Text(
+                            message?.peerUserName ?? '',
+                            style: TextStyle(
+                                color: textColor,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.fade,
+                            softWrap: false,
+                          ),
                         ),
-                      ),
-                      this.buttonWidget != null
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                  Container(child: this.buttonWidget),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 8.0),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      buttonText ?? '',
-                                      style: TextStyle(
-                                          color: textColor,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ),
-                                ])
-                          : Text(message?.messageText ?? '',
-                              style: TextStyle(
-                                  color: textColor,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.normal),
-                              overflow: TextOverflow.visible,
-                              softWrap: true)
-                    ],
+                        Text(
+                          message?.timeStamp ?? '',
+                          style: TextStyle(
+                              color: textColor,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.normal),
+                          overflow: TextOverflow.fade,
+                          softWrap: false,
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
+                    ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: icon,
-                  ),
+                  this.buttonWidget != null
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                              Container(child: this.buttonWidget),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              ),
+                              Flexible(
+                                child: Text(
+                                  buttonText ?? '',
+                                  style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ),
+                            ])
+                      : Text(message?.messageText ?? '',
+                          style: TextStyle(
+                              color: textColor,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.normal),
+                          overflow: TextOverflow.visible,
+                          softWrap: true)
                 ],
               ),
             ),
